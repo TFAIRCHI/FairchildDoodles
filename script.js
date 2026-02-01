@@ -1,0 +1,204 @@
+// ============================================
+// Mobile Navigation Toggle
+// ============================================
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('open');
+    });
+
+    // Close menu when a nav link is clicked
+    navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+            navLinks.classList.remove('open');
+        });
+    });
+}
+
+// ============================================
+// Scroll-Triggered Fade-In Animations
+// ============================================
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+};
+
+const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(function (el) {
+    observer.observe(el);
+});
+
+// ============================================
+// Puppy Filter Bar (puppies.html only)
+// ============================================
+const filterButtons = document.querySelectorAll('.filter-btn');
+const puppyCards    = document.querySelectorAll('.puppy-card[data-status]');
+
+if (filterButtons.length > 0 && puppyCards.length > 0) {
+    filterButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            // Update active button
+            filterButtons.forEach(function (b) { b.classList.remove('active'); });
+            this.classList.add('active');
+
+            var selected = this.getAttribute('data-filter');
+
+            puppyCards.forEach(function (card) {
+                if (selected === 'all' || card.getAttribute('data-status') === selected) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+}
+
+// ============================================
+// Contact Form (contact.html only)
+// ============================================
+var contactForm  = document.getElementById('contactForm');
+var formSuccess  = document.getElementById('formSuccess');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var formData = {
+            name:     document.getElementById('name').value,
+            email:    document.getElementById('email').value,
+            phone:    document.getElementById('phone').value,
+            interest: document.getElementById('interest').value,
+            message:  document.getElementById('message').value
+        };
+
+        // Log for development
+        console.log('Form submitted:', formData);
+
+        // TODO: Replace with your Azure Function endpoint
+        // fetch('YOUR_AZURE_FUNCTION_URL', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(formData)
+        // })
+        // .then(function (response) { return response.json(); })
+        // .then(function (data) {
+        //     console.log('Success:', data);
+        //     showSuccess();
+        // })
+        // .catch(function (error) {
+        //     console.error('Error:', error);
+        //     alert('Something went wrong. Please try again.');
+        // });
+
+        // Show inline success message
+        showSuccess();
+    });
+}
+
+function showSuccess() {
+    // Hide the form
+    contactForm.style.display = 'none';
+
+    // Show the success block
+    if (formSuccess) {
+        formSuccess.classList.add('visible');
+    }
+}
+
+// ============================================
+// Parents Carousel
+// ============================================
+var parentsCarousels = document.querySelectorAll('.parents-carousel');
+
+parentsCarousels.forEach(function (carousel) {
+    var slides = carousel.querySelectorAll('.parents-slide');
+    var dotsContainer = carousel.querySelector('.parents-carousel-dots');
+    var interval = parseInt(carousel.getAttribute('data-interval') || '4500', 10);
+    var current = 0;
+    var timerId = null;
+
+    if (!slides.length || !dotsContainer) {
+        return;
+    }
+
+    function setActive(index) {
+        slides.forEach(function (slide, i) {
+            slide.classList.toggle('is-active', i === index);
+        });
+        dotsContainer.querySelectorAll('button').forEach(function (dot, i) {
+            dot.classList.toggle('is-active', i === index);
+        });
+        current = index;
+    }
+
+    slides.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Show slide ' + (i + 1));
+        dot.addEventListener('click', function () {
+            stopAuto();
+            setActive(i);
+            startAuto();
+        });
+        dotsContainer.appendChild(dot);
+    });
+
+    function next() {
+        var nextIndex = (current + 1) % slides.length;
+        setActive(nextIndex);
+    }
+
+    function prev() {
+        var prevIndex = (current - 1 + slides.length) % slides.length;
+        setActive(prevIndex);
+    }
+
+    function startAuto() {
+        if (timerId) {
+            return;
+        }
+        timerId = setInterval(next, interval);
+    }
+
+    function stopAuto() {
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        }
+    }
+
+    setActive(0);
+    startAuto();
+
+    var prevBtn = carousel.querySelector('.parents-carousel-prev');
+    var nextBtn = carousel.querySelector('.parents-carousel-next');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+            stopAuto();
+            prev();
+            startAuto();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            stopAuto();
+            next();
+            startAuto();
+        });
+    }
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+});
