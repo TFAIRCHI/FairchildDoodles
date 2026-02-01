@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Fairchild Golden Doodles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo"><img src="logo.png" alt="Fairchild Golden Doodles" class="nav-logo__img">Fairchild <strong>Golden Doodles</strong></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you</p>
+        </div>
+    </header>
+
+    <!-- Contact Layout -->
+    <section class="contact-page">
+        <div class="contact-page-grid">
+
+            <!-- Form Column -->
+            <div class="contact-form-wrapper fade-in">
+                <h2>Reserve Your Puppy</h2>
+                <p class="contact-form-intro">Fill out the form below and we'll get back to you within 24 hours. Let us know which puppy caught your eye!</p>
+
+                <form class="contact-form" id="contactForm" action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">I'm Interested In *</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Select an option</option>
+                            <option value="luna">Luna – F1B Female ($2,500)</option>
+                            <option value="max">Max – F1 Male ($2,500)</option>
+                            <option value="cooper">Cooper – F1 Male ($2,500)</option>
+                            <option value="sadie">Sadie – F1B Female ($2,800)</option>
+                            <option value="upcoming">Upcoming Litters</option>
+                            <option value="info">General Information</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about yourself, your home, and what you're looking for in a puppy..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">SEND MESSAGE</button>
+                </form>
+
+                <!-- Success Message (hidden by default) -->
+                <div class="form-success" id="formSuccess">
+                    <div class="form-success-icon">✓</div>
+                    <h3>Thank You!</h3>
+                    <p>Your message has been received. We'll be in touch within 24 hours.</p>
+                </div>
+            </div>
+
+            <!-- Info Column -->
+            <div class="contact-info-wrapper fade-in">
+
+                <div class="contact-info-card">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-detail">
+                        <span class="contact-detail-icon">📍</span>
+                        <div>
+                            <strong>Location</strong>
+                            <p>Fairchild Golden Doodles<br>Aiken, South Carolina</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="contact-detail-icon">📧</span>
+                        <div>
+                            <strong>Email</strong>
+                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="167e737a7a795671797a7273786264737765637365727979727a73653875797b">[email&#160;protected]</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="contact-detail-icon">📞</span>
+                        <div>
+                            <strong>Phone</strong>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="contact-detail-icon">🕐</span>
+                        <div>
+                            <strong>Response Time</strong>
+                            <p>We typically reply within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>What to Expect</h3>
+                    <div class="expect-step">
+                        <span class="expect-number">1</span>
+                        <div>
+                            <strong>Submit Your Inquiry</strong>
+                            <p>Fill out the form with your information and interest.</p>
+                        </div>
+                    </div>
+                    <div class="expect-step">
+                        <span class="expect-number">2</span>
+                        <div>
+                            <strong>We'll Be in Touch</strong>
+                            <p>We'll reach out to answer questions and learn about your home.</p>
+                        </div>
+                    </div>
+                    <div class="expect-step">
+                        <span class="expect-number">3</span>
+                        <div>
+                            <strong>Meet the Puppies</strong>
+                            <p>Schedule a visit to meet your potential new family member.</p>
+                        </div>
+                    </div>
+                    <div class="expect-step">
+                        <span class="expect-number">4</span>
+                        <div>
+                            <strong>Welcome Home</strong>
+                            <p>Take your new Golden Doodle home with full support from us.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Fairchild Golden Doodles. All rights reserved.</p>
+        <p>Ethical breeding • Health tested • Family raised</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="contact.html">Email</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
