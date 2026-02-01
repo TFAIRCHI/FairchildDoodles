@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puppy Gallery - Fairchild Golden Doodles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo"><img src="logo.png" alt="Fairchild Golden Doodles" class="nav-logo__img">Fairchild <strong>Golden Doodles</strong></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <h1>Puppy Gallery</h1>
+            <p>Browse our favorite moments and adorable memories</p>
+        </div>
+    </header>
+
+    <!-- Gallery -->
+    <section class="gallery-page">
+        <div class="section-header">
+            <h2>Previous Litters</h2>
+            <p>Click any photo to view it larger and browse through the gallery</p>
+        </div>
+        <div class="gallery-grid" id="puppyGalleryGrid" data-source="Pictures/puppy-gallery/manifest.json"></div>
+        <script id="puppyGalleryData" type="application/json">
+        [
+          {
+            "src": "Pictures/puppy-gallery/First_LitterPuppies.jpg",
+            "alt": "First litter puppies"
+          },
+          {
+            "src": "Pictures/puppy-gallery/Second_Litter_BlackRedCollar.jpg",
+            "alt": "Sadie's second litter"
+          }
+        ]
+        </script>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Fairchild Golden Doodles. All rights reserved.</p>
+        <p>Ethical breeding • Health tested • Family raised</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="contact.html">Email</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

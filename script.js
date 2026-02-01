@@ -202,3 +202,105 @@ parentsCarousels.forEach(function (carousel) {
     carousel.addEventListener('mouseenter', stopAuto);
     carousel.addEventListener('mouseleave', startAuto);
 });
+
+// ============================================
+// Puppy Gallery
+// ============================================
+var galleryGrid = document.getElementById('puppyGalleryGrid');
+
+if (galleryGrid) {
+    var dataSource = galleryGrid.getAttribute('data-source');
+    var inlineDataEl = document.getElementById('puppyGalleryData');
+    var galleryLightbox = document.createElement('div');
+    galleryLightbox.className = 'gallery-lightbox';
+    galleryLightbox.innerHTML = '' +
+        '<button class="gallery-lightbox-close" type="button" aria-label="Close">×</button>' +
+        '<button class="gallery-lightbox-arrow gallery-lightbox-prev" type="button" aria-label="Previous">‹</button>' +
+        '<img alt="Gallery image">' +
+        '<button class="gallery-lightbox-arrow gallery-lightbox-next" type="button" aria-label="Next">›</button>';
+    document.body.appendChild(galleryLightbox);
+
+    var lightboxImg = galleryLightbox.querySelector('img');
+    var closeBtn = galleryLightbox.querySelector('.gallery-lightbox-close');
+    var prevBtn = galleryLightbox.querySelector('.gallery-lightbox-prev');
+    var nextBtn = galleryLightbox.querySelector('.gallery-lightbox-next');
+    var galleryItems = [];
+    var currentIndex = 0;
+
+    function renderGrid(items) {
+        galleryGrid.innerHTML = '';
+        items.forEach(function (item, index) {
+            var card = document.createElement('div');
+            card.className = 'gallery-item';
+            card.innerHTML = '<img src="' + item.src + '" alt="' + (item.alt || 'Puppy photo') + '">';
+            card.addEventListener('click', function () {
+                openLightbox(index);
+            });
+            galleryGrid.appendChild(card);
+        });
+    }
+
+    function openLightbox(index) {
+        currentIndex = index;
+        lightboxImg.src = galleryItems[index].src;
+        lightboxImg.alt = galleryItems[index].alt || 'Puppy photo';
+        galleryLightbox.classList.add('is-active');
+    }
+
+    function closeLightbox() {
+        galleryLightbox.classList.remove('is-active');
+    }
+
+    function showNext() {
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        openLightbox(currentIndex);
+    }
+
+    function showPrev() {
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        openLightbox(currentIndex);
+    }
+
+    galleryLightbox.addEventListener('click', function (e) {
+        if (e.target === galleryLightbox) {
+            closeLightbox();
+        }
+    });
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', showNext);
+    prevBtn.addEventListener('click', showPrev);
+
+    function loadInlineData() {
+        if (!inlineDataEl) {
+            return false;
+        }
+        try {
+            var parsed = JSON.parse(inlineDataEl.textContent);
+            galleryItems = Array.isArray(parsed) ? parsed : [];
+            if (galleryItems.length) {
+                renderGrid(galleryItems);
+                return true;
+            }
+        } catch (e) {
+            return false;
+        }
+        return false;
+    }
+
+    var loadedInline = loadInlineData();
+
+    if (!loadedInline && dataSource) {
+        fetch(dataSource)
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                galleryItems = Array.isArray(data) ? data : [];
+                if (galleryItems.length === 0) {
+                    return;
+                }
+                renderGrid(galleryItems);
+            })
+            .catch(function () {
+                // Silently fail if the manifest is missing
+            });
+    }
+}
