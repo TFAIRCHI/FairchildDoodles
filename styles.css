@@ -89,31 +89,31 @@ a { text-decoration:none; color:inherit; }
 .nav-links {
     list-style:none;
     display:flex;
-    gap:2.2rem;
+    gap:1.6rem;
     align-items:center;
 }
 .nav-links a {
     font-size:.72rem;
-    font-weight:600;
+    font-weight:700;
     letter-spacing:1.6px;
     text-transform:uppercase;
-    color:var(--slate);
+    color:var(--navy-deep);
     position:relative;
-    padding-bottom:5px;
+    padding:.35rem .85rem;
+    border-radius:999px;
+    border:1px solid rgba(43,61,79,.12);
+    background:rgba(240,236,228,.5);
     transition:color .25s;
 }
 .nav-links a::after {
-    content:'';
-    position:absolute;
-    bottom:0; left:0;
-    width:0; height:1.5px;
-    background:var(--gold);
-    transition:width .3s var(--ease);
+    display:none;
 }
 .nav-links a:hover,
-.nav-links a.active { color:var(--navy-deep); }
-.nav-links a:hover::after,
-.nav-links a.active::after { width:100%; }
+.nav-links a.active {
+    color:var(--navy-deep);
+    border-color:rgba(43,61,79,.22);
+    background:var(--white);
+}
 
 /* Hamburger */
 .nav-toggle {
@@ -137,7 +137,7 @@ a { text-decoration:none; color:inherit; }
    PAGE HEADER  (about / puppies / contact)
    ================================================ */
 .page-header {
-    padding:calc(var(--nav-h) + 4rem) 2rem 3.4rem;
+    padding:calc(var(--nav-h) + 1.8rem) 2rem 1.6rem;
     background:linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-mid) 100%);
     text-align:center;
     position:relative;
@@ -1425,6 +1425,47 @@ section {
     font-size:.77rem;
     color:var(--slate);
     line-height:1.5;
+}
+
+/* Allergy page */
+.allergy-page {
+    max-width:1000px;
+    margin:0 auto;
+    padding:3.5rem 2rem 5rem;
+}
+.allergy-card {
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:2rem;
+    box-shadow:var(--shadow-md);
+    margin-bottom:1.8rem;
+}
+.allergy-list {
+    list-style:disc;
+    padding-left:1.4rem;
+    color:var(--navy-deep);
+    font-size:1rem;
+    line-height:1.8;
+}
+.allergy-list li {
+    margin-bottom:.7rem;
+}
+.allergy-note {
+    background:var(--cream);
+    border:1px solid var(--cream-dark);
+    border-radius:var(--radius);
+    padding:1.6rem;
+}
+.allergy-note h3 {
+    font-family:'Playfair Display',serif;
+    font-size:1.2rem;
+    margin-bottom:.5rem;
+    color:var(--navy-deep);
+}
+.allergy-note p {
+    font-size:.9rem;
+    color:var(--slate);
+    line-height:1.7;
 }
 
 /* ================================================
