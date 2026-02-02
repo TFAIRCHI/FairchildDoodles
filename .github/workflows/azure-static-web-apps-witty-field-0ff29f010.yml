@@ -22,8 +22,6 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - name: Build gallery manifest
-        run: pwsh scripts/build-gallery-manifest.ps1
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
       - name: Get Id Token

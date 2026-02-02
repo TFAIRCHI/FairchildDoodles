@@ -1,10 +1,130 @@
 [
-  {
-    "src": "Pictures/puppy-gallery/First_LitterPuppies.jpg",
-    "alt": "First litter puppies"
-  },
     {
-    "src": "Pictures/puppy-gallery/Second_Litter_BlackRedCollar.jpg",
-    "alt": "Sadies Second Litter"
-  }
+        "src":  "Pictures/puppy-gallery/First_LitterPuppies.jpg",
+        "alt":  "First LitterPuppies"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-0470CDB4-FA36-4494-BEA5-894A508935CA.jpeg",
+        "alt":  "original-0470CDB4-FA36-4494-BEA5-894A508935CA"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-2A5FD1CD-5618-4DFB-A204-1571E0D99FC3.jpeg",
+        "alt":  "original-2A5FD1CD-5618-4DFB-A204-1571E0D99FC3"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-2E61DEC4-C207-4A42-899D-3AC9E510DA66.jpeg",
+        "alt":  "original-2E61DEC4-C207-4A42-899D-3AC9E510DA66"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-322CBA15-EAEE-487B-A4F0-520A741E804C.jpeg",
+        "alt":  "original-322CBA15-EAEE-487B-A4F0-520A741E804C"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-3A54B07B-EAD8-463E-815E-0C863262796E.jpeg",
+        "alt":  "original-3A54B07B-EAD8-463E-815E-0C863262796E"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-41164FB0-562E-4C7B-B334-10C974D935AE.jpeg",
+        "alt":  "original-41164FB0-562E-4C7B-B334-10C974D935AE"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-4FCB835F-C287-49D6-8361-0E38B3314E09.jpeg",
+        "alt":  "original-4FCB835F-C287-49D6-8361-0E38B3314E09"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-5275F9CA-0408-45E1-9E42-8F3C489C8216.jpeg",
+        "alt":  "original-5275F9CA-0408-45E1-9E42-8F3C489C8216"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-561FE3A3-1CC1-4000-A7FF-ADD8557C656F.jpeg",
+        "alt":  "original-561FE3A3-1CC1-4000-A7FF-ADD8557C656F"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-785D0666-332A-42C4-8368-D0D42296A265.jpeg",
+        "alt":  "original-785D0666-332A-42C4-8368-D0D42296A265"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-7D10C6FC-128D-4101-8ACB-D0F7E4D3907A.jpeg",
+        "alt":  "original-7D10C6FC-128D-4101-8ACB-D0F7E4D3907A"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-7F7B1CEC-AA7E-47D6-9633-7B80836471D3.jpeg",
+        "alt":  "original-7F7B1CEC-AA7E-47D6-9633-7B80836471D3"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-88949FAD-D592-46B4-B6B2-BFDC0D5CE89E.jpeg",
+        "alt":  "original-88949FAD-D592-46B4-B6B2-BFDC0D5CE89E"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-9BEFC094-15E1-42CE-935B-97160A173D28.jpeg",
+        "alt":  "original-9BEFC094-15E1-42CE-935B-97160A173D28"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-A1246140-EF34-4412-BAC0-819B292D72D4.jpeg",
+        "alt":  "original-A1246140-EF34-4412-BAC0-819B292D72D4"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-A5CEB253-1EB5-409E-A706-2FE03F5A310F.jpeg",
+        "alt":  "original-A5CEB253-1EB5-409E-A706-2FE03F5A310F"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-AFC5F5D5-39CA-4D39-AC40-B760E04F9577.jpeg",
+        "alt":  "original-AFC5F5D5-39CA-4D39-AC40-B760E04F9577"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-B3923CEE-2697-45B9-A9D9-1D177D3D24C6.jpeg",
+        "alt":  "original-B3923CEE-2697-45B9-A9D9-1D177D3D24C6"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-C10ED458-70FE-456B-93EA-9AB061BB1A56.jpeg",
+        "alt":  "original-C10ED458-70FE-456B-93EA-9AB061BB1A56"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-C4895ED5-4AA0-42EC-9828-47E5C1D75BB8.jpeg",
+        "alt":  "original-C4895ED5-4AA0-42EC-9828-47E5C1D75BB8"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-C7638BBA-11E8-48B1-B0B5-694D9923E064.jpeg",
+        "alt":  "original-C7638BBA-11E8-48B1-B0B5-694D9923E064"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-C81026C5-643F-45CA-A131-EF8337AC8992.jpeg",
+        "alt":  "original-C81026C5-643F-45CA-A131-EF8337AC8992"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-DB695799-2457-4FDC-BC8B-8F1CBACE1F0D.jpeg",
+        "alt":  "original-DB695799-2457-4FDC-BC8B-8F1CBACE1F0D"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-DF9FDC80-64E2-4D1C-809B-AF03C3BCC72A.jpeg",
+        "alt":  "original-DF9FDC80-64E2-4D1C-809B-AF03C3BCC72A"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-E6B7DD96-6643-4DAE-A5F4-32297280EE87.jpeg",
+        "alt":  "original-E6B7DD96-6643-4DAE-A5F4-32297280EE87"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-F93F0D7C-57B0-425D-9F29-BD2AD91C1298.jpeg",
+        "alt":  "original-F93F0D7C-57B0-425D-9F29-BD2AD91C1298"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/original-FD6F552E-9E7F-47E1-AC32-4EB64669755E.jpeg",
+        "alt":  "original-FD6F552E-9E7F-47E1-AC32-4EB64669755E"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/processed-1F6502AD-C669-471E-8DDD-1739DECDF958.jpeg",
+        "alt":  "processed-1F6502AD-C669-471E-8DDD-1739DECDF958"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/processed-50BBA48A-1139-4D44-80DE-3EE51F664D10.jpeg",
+        "alt":  "processed-50BBA48A-1139-4D44-80DE-3EE51F664D10"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/processed-C59BF22E-6C39-4E76-BC72-BD7EA7B2AD7E.jpeg",
+        "alt":  "processed-C59BF22E-6C39-4E76-BC72-BD7EA7B2AD7E"
+    },
+    {
+        "src":  "Pictures/puppy-gallery/Second_Litter_BlackRedCollar.jpg",
+        "alt":  "Second Litter BlackRedCollar"
+    }
 ]

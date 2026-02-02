@@ -9,7 +9,9 @@ if (-not (Test-Path $galleryDir)) {
     throw "Gallery folder not found: $galleryDir"
 }
 
-$files = Get-ChildItem -Path $galleryDir -File -Include *.jpg,*.jpeg,*.png | Sort-Object Name
+$files = Get-ChildItem -Path $galleryDir -File |
+    Where-Object { $_.Extension -match '\.(jpg|jpeg|png)$' } |
+    Sort-Object Name
 
 $items = @()
 foreach ($file in $files) {
