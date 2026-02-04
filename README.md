@@ -1,6 +1,6 @@
 # FairchildDoodles Website
 
-Static marketing site for Fairchild Golden Doodles. Pure HTML/CSS/JS, deployed via Azure Static Web Apps.
+Static marketing site for Fairchild Doodles. Pure HTML/CSS/JS, deployed via Azure Static Web Apps.
 
 ## Quick Start
 - Open `index.html` in a browser for a quick preview.
