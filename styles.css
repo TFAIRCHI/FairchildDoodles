@@ -178,7 +178,16 @@ a { text-decoration:none; color:inherit; }
     background:linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
-.page-header-content { position:relative; z-index:1; }
+.page-header-content {
+    position:relative;
+    z-index:1;
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) minmax(260px, 420px);
+    gap:2rem;
+    align-items:center;
+}
 
 .page-header h1 {
     font-family:'Playfair Display',serif;
@@ -191,6 +200,33 @@ a { text-decoration:none; color:inherit; }
 .page-header p {
     font-size:.97rem;
     color:var(--silver);
+    font-weight:300;
+}
+
+.page-header-info {
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:16px;
+    padding:1.3rem 1.5rem 1.4rem;
+    text-align:left;
+}
+.page-header-info .section-label {
+    color:var(--gold);
+}
+.page-header-info .section-label::before,
+.page-header-info .section-label::after {
+    background:var(--gold);
+}
+.page-header-info h2 {
+    font-family:'Playfair Display',serif;
+    font-size:1.7rem;
+    color:var(--white);
+    margin:.4rem 0 .5rem;
+}
+.page-header-info p {
+    color:var(--off-white);
+    font-size:.92rem;
+    line-height:1.65;
     font-weight:300;
 }
 
@@ -719,6 +755,161 @@ section {
 .puppy-info .status:not(.available) {
     background:rgba(201,160,106,.14);
     color:var(--gold-dim);
+}
+
+/* ================================================
+   PUPPY BASEBALL CARDS (puppies page)
+   ================================================ */
+.puppies-availability {
+    padding:3.5rem 2rem 5rem;
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.puppy-baseball-grid {
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:1.8rem;
+    max-width:unset;
+    margin:0;
+}
+
+.puppy-baseball-card {
+    background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(240,236,228,.9) 100%);
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(43,61,79,.1);
+    box-shadow:var(--shadow-md);
+    display:flex;
+    flex-direction:row;
+    position:relative;
+    align-items:stretch;
+}
+.puppy-baseball-card::before {
+    content:'';
+    position:absolute;
+    inset:12px;
+    border-radius:14px;
+    border:1px dashed rgba(43,61,79,.14);
+    pointer-events:none;
+}
+
+.puppy-card-carousel {
+    position:relative;
+    padding:12px;
+    flex:0 0 70%;
+}
+
+.puppy-card-slides {
+    position:relative;
+    width:100%;
+    aspect-ratio:1 / 1;
+    border-radius:14px;
+    overflow:hidden;
+    background:linear-gradient(148deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.puppy-card-slide {
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:opacity .5s var(--ease);
+}
+.puppy-card-slide.is-active { opacity:1; }
+.puppy-card-slide img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.puppy-card-arrow {
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    border:1px solid rgba(43,61,79,.25);
+    background:rgba(255,255,255,.88);
+    color:var(--navy-deep);
+    font-size:1.2rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+    z-index:2;
+}
+.puppy-card-prev { left:16px; }
+.puppy-card-next { right:16px; }
+.puppy-card-arrow:hover {
+    transform:translateY(-50%) scale(1.05);
+    background:var(--white);
+    box-shadow:0 8px 18px rgba(43,61,79,.2);
+}
+
+.puppy-card-dots {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.45rem;
+    margin:.8rem 0 0;
+}
+.puppy-card-dots button {
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    border:1px solid rgba(43,61,79,.3);
+    background:transparent;
+    cursor:pointer;
+    transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+}
+.puppy-card-dots button.is-active {
+    background:var(--gold);
+    border-color:var(--gold);
+    transform:scale(1.2);
+}
+
+.puppy-card-body {
+    padding:1.3rem 1.6rem 1.6rem;
+    position:relative;
+    z-index:1;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.puppy-card-body h3 {
+    font-family:'Playfair Display',serif;
+    font-size:1.55rem;
+    font-weight:700;
+    color:var(--navy-deep);
+    margin-bottom:.2rem;
+}
+.puppy-card-meta {
+    font-size:.92rem;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:var(--gold-dim);
+    margin-bottom:.65rem;
+}
+.puppy-card-tags {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.45rem;
+}
+.puppy-card-tags span {
+    font-size:.78rem;
+    font-weight:600;
+    color:var(--navy-mid);
+    background:rgba(255,255,255,.7);
+    border:1px solid var(--cream-dark);
+    padding:.26rem .6rem;
+    border-radius:999px;
 }
 
 /* ================================================
@@ -1263,6 +1454,52 @@ section {
     border:2px solid rgba(255,255,255,.35);
     box-shadow:0 14px 30px rgba(182,31,42,.35);
 }
+
+/* Home announcement banner */
+.home-announcement {
+    margin-top:var(--nav-h);
+    background:
+        linear-gradient(135deg, rgba(182,31,42,.95), rgba(230,69,59,.9)),
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.18), transparent 55%);
+    border-bottom:2px solid rgba(255,255,255,.35);
+    padding:1.05rem 2rem;
+    box-shadow:0 16px 32px rgba(182,31,42,.28);
+}
+.home-announcement__content {
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1.2rem;
+    color:var(--white);
+}
+.home-announcement__content p {
+    font-family:'Playfair Display',serif;
+    font-size:1.05rem;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    text-shadow:0 6px 16px rgba(0,0,0,.35);
+    background:rgba(43,61,79,.35);
+    border:1px solid rgba(255,255,255,.28);
+    padding:.45rem .9rem;
+    border-radius:999px;
+    display:inline-block;
+}
+.home-announcement__content strong {
+    color:var(--off-white);
+}
+.home-announcement .cta-button {
+    background:var(--gold);
+    color:var(--white);
+    box-shadow:0 6px 18px rgba(201,160,106,.4);
+}
+.home-announcement .cta-button:hover {
+    background:var(--gold-dim);
+}
+.home-announcement .cta-button {
+    flex-shrink:0;
+}
 .filter-bar {
     display:flex;
     justify-content:center;
@@ -1596,6 +1833,11 @@ footer p { font-size:.77rem; margin-bottom:.35rem; }
     .about-preview-content  { grid-template-columns:1fr; }
     .about-preview-image    { min-height:260px; }
     .parents-carousel-layout{ grid-template-columns:1fr; }
+    .puppy-baseball-grid    { grid-template-columns:1fr; }
+    .page-header-content    { grid-template-columns:1fr; text-align:center; }
+    .page-header-info       { text-align:center; }
+    .puppy-baseball-card    { flex-direction:column; }
+    .puppy-card-carousel    { flex:0 0 auto; }
 }
 
 @media(max-width:768px){
@@ -1633,5 +1875,10 @@ footer p { font-size:.77rem; margin-bottom:.35rem; }
     .cta-strip-buttons {
         flex-direction:column;
         align-items:center;
+    }
+
+    .home-announcement__content {
+        flex-direction:column;
+        text-align:center;
     }
 }

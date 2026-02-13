@@ -204,6 +204,179 @@ parentsCarousels.forEach(function (carousel) {
 });
 
 // ============================================
+// Puppy Card Carousels (puppies.html only)
+// ============================================
+var puppyCarousels = document.querySelectorAll('.puppy-card-carousel');
+
+puppyCarousels.forEach(function (carousel) {
+    var slides = carousel.querySelectorAll('.puppy-card-slide');
+    var dotsContainer = carousel.querySelector('.puppy-card-dots');
+    var interval = parseInt(carousel.getAttribute('data-interval') || '5000', 10);
+    var current = 0;
+    var timerId = null;
+
+    if (!slides.length) {
+        return;
+    }
+
+    function setActive(index) {
+        slides.forEach(function (slide, i) {
+            slide.classList.toggle('is-active', i === index);
+        });
+        if (dotsContainer) {
+            dotsContainer.querySelectorAll('button').forEach(function (dot, i) {
+                dot.classList.toggle('is-active', i === index);
+            });
+        }
+        current = index;
+    }
+
+    if (dotsContainer) {
+        slides.forEach(function (_, i) {
+            var dot = document.createElement('button');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', 'Show photo ' + (i + 1));
+            dot.addEventListener('click', function () {
+                stopAuto();
+                setActive(i);
+                startAuto();
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function next() {
+        var nextIndex = (current + 1) % slides.length;
+        setActive(nextIndex);
+    }
+
+    function prev() {
+        var prevIndex = (current - 1 + slides.length) % slides.length;
+        setActive(prevIndex);
+    }
+
+    function startAuto() {
+        if (timerId) {
+            return;
+        }
+        timerId = setInterval(next, interval);
+    }
+
+    function stopAuto() {
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        }
+    }
+
+    setActive(0);
+    startAuto();
+
+    var prevBtn = carousel.querySelector('.puppy-card-prev');
+    var nextBtn = carousel.querySelector('.puppy-card-next');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+            stopAuto();
+            prev();
+            startAuto();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            stopAuto();
+            next();
+            startAuto();
+        });
+    }
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+});
+
+// ============================================
+// Puppy Card Lightbox (puppies.html only)
+// ============================================
+var puppyCardImages = document.querySelectorAll('.puppy-card-slide img');
+
+if (puppyCardImages.length) {
+    var puppyLightbox = document.querySelector('.gallery-lightbox');
+
+    if (!puppyLightbox) {
+        puppyLightbox = document.createElement('div');
+        puppyLightbox.className = 'gallery-lightbox';
+        puppyLightbox.innerHTML = '' +
+            '<button class="gallery-lightbox-close" type="button" aria-label="Close">×</button>' +
+            '<button class="gallery-lightbox-arrow gallery-lightbox-prev" type="button" aria-label="Previous">‹</button>' +
+            '<img alt="Puppy photo">' +
+            '<button class="gallery-lightbox-arrow gallery-lightbox-next" type="button" aria-label="Next">›</button>';
+        document.body.appendChild(puppyLightbox);
+    }
+
+    var puppyLightboxImg = puppyLightbox.querySelector('img');
+    var puppyCloseBtn = puppyLightbox.querySelector('.gallery-lightbox-close');
+    var puppyPrevBtn = puppyLightbox.querySelector('.gallery-lightbox-prev');
+    var puppyNextBtn = puppyLightbox.querySelector('.gallery-lightbox-next');
+    var puppyLightboxItems = [];
+    var puppyCurrentIndex = 0;
+
+    function puppyOpenLightbox(index) {
+        puppyCurrentIndex = index;
+        puppyLightboxImg.src = puppyLightboxItems[index].src;
+        puppyLightboxImg.alt = puppyLightboxItems[index].alt || 'Puppy photo';
+        puppyLightbox.classList.add('is-active');
+    }
+
+    function puppyCloseLightbox() {
+        puppyLightbox.classList.remove('is-active');
+    }
+
+    function puppyShowNext() {
+        puppyCurrentIndex = (puppyCurrentIndex + 1) % puppyLightboxItems.length;
+        puppyOpenLightbox(puppyCurrentIndex);
+    }
+
+    function puppyShowPrev() {
+        puppyCurrentIndex = (puppyCurrentIndex - 1 + puppyLightboxItems.length) % puppyLightboxItems.length;
+        puppyOpenLightbox(puppyCurrentIndex);
+    }
+
+    puppyLightbox.addEventListener('click', function (e) {
+        if (e.target === puppyLightbox) {
+            puppyCloseLightbox();
+        }
+    });
+    if (puppyCloseBtn) {
+        puppyCloseBtn.addEventListener('click', puppyCloseLightbox);
+    }
+    if (puppyNextBtn) {
+        puppyNextBtn.addEventListener('click', puppyShowNext);
+    }
+    if (puppyPrevBtn) {
+        puppyPrevBtn.addEventListener('click', puppyShowPrev);
+    }
+
+    puppyCardImages.forEach(function (img) {
+        img.addEventListener('click', function () {
+            var carousel = img.closest('.puppy-card-carousel');
+            var slides = carousel ? carousel.querySelectorAll('.puppy-card-slide img') : [];
+            puppyLightboxItems = Array.prototype.map.call(slides, function (slideImg) {
+                return {
+                    src: slideImg.getAttribute('src'),
+                    alt: slideImg.getAttribute('alt')
+                };
+            });
+            puppyCurrentIndex = Array.prototype.indexOf.call(slides, img);
+            if (puppyCurrentIndex < 0) {
+                puppyCurrentIndex = 0;
+            }
+            puppyOpenLightbox(puppyCurrentIndex);
+        });
+    });
+}
+
+// ============================================
 // Puppy Gallery
 // ============================================
 var galleryGrid = document.getElementById('puppyGalleryGrid');
