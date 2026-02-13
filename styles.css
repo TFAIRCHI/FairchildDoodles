@@ -1475,6 +1475,9 @@ section {
     color:var(--white);
 }
 .home-announcement__content p {
+    text-align:center;
+}
+.home-announcement__content p {
     font-family:'Playfair Display',serif;
     font-size:1.05rem;
     letter-spacing:.4px;
