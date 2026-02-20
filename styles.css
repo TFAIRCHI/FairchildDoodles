@@ -800,6 +800,50 @@ section {
     flex:0 0 70%;
 }
 
+.puppy-card-carousel--sold .puppy-card-sold-banner {
+    position:absolute;
+    top:18px;
+    left:22px;
+    right:22px;
+    z-index:3;
+    text-align:center;
+    padding:.55rem 1.7rem;
+    font-family:'Playfair Display',serif;
+    font-size:1.6rem;
+    font-weight:700;
+    letter-spacing:.4rem;
+    text-transform:uppercase;
+    color:#ffffff;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, #e6453b, #b61f2a);
+    border:2px solid rgba(255,255,255,.95);
+    box-shadow:0 12px 26px rgba(182,31,42,.35);
+    text-shadow:0 4px 10px rgba(0,0,0,.35);
+    box-shadow:
+        0 12px 26px rgba(182,31,42,.35),
+        inset 0 0 0 2px rgba(255,255,255,.45);
+    pointer-events:none;
+}
+
+.puppy-card-carousel--sold .puppy-card-sold-banner::before,
+.puppy-card-carousel--sold .puppy-card-sold-banner::after {
+    content:'';
+    position:absolute;
+    bottom:-10px;
+    width:0;
+    height:0;
+    border-top:10px solid #8f0f1a;
+}
+.puppy-card-carousel--sold .puppy-card-sold-banner::before {
+    left:18px;
+    border-left:10px solid transparent;
+}
+.puppy-card-carousel--sold .puppy-card-sold-banner::after {
+    right:18px;
+    border-right:10px solid transparent;
+}
+
 .puppy-card-slides {
     position:relative;
     width:100%;
