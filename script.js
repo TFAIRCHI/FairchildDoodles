@@ -214,10 +214,20 @@ puppyCarousels.forEach(function (carousel) {
     var interval = parseInt(carousel.getAttribute('data-interval') || '5000', 10);
     var current = 0;
     var timerId = null;
+    var card = carousel.closest('.puppy-baseball-card');
+    var weekButtons = card ? card.querySelectorAll('.puppy-week-jump') : [];
+    var weekIndexMap = {};
 
     if (!slides.length) {
         return;
     }
+
+    slides.forEach(function (slide, i) {
+        var week = slide.getAttribute('data-week');
+        if (week && weekIndexMap[week] === undefined) {
+            weekIndexMap[week] = i;
+        }
+    });
 
     function setActive(index) {
         slides.forEach(function (slide, i) {
@@ -226,6 +236,12 @@ puppyCarousels.forEach(function (carousel) {
         if (dotsContainer) {
             dotsContainer.querySelectorAll('button').forEach(function (dot, i) {
                 dot.classList.toggle('is-active', i === index);
+            });
+        }
+        if (weekButtons.length) {
+            var activeWeek = slides[index].getAttribute('data-week');
+            weekButtons.forEach(function (button) {
+                button.classList.toggle('is-active', button.getAttribute('data-week') === activeWeek);
             });
         }
         current = index;
@@ -242,6 +258,21 @@ puppyCarousels.forEach(function (carousel) {
                 startAuto();
             });
             dotsContainer.appendChild(dot);
+        });
+    }
+
+    if (weekButtons.length) {
+        weekButtons.forEach(function (button) {
+            var week = button.getAttribute('data-week');
+            if (weekIndexMap[week] === undefined) {
+                button.disabled = true;
+                return;
+            }
+            button.addEventListener('click', function () {
+                stopAuto();
+                setActive(weekIndexMap[week]);
+                startAuto();
+            });
         });
     }
 
