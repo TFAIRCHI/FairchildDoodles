@@ -222,6 +222,25 @@ puppyCarousels.forEach(function (carousel) {
         return;
     }
 
+    function loadSlideImage(index) {
+        var slide = slides[index];
+        var img = slide ? slide.querySelector('img[data-src]') : null;
+
+        if (img) {
+            img.src = img.getAttribute('data-src');
+            img.removeAttribute('data-src');
+        }
+    }
+
+    function preloadNearbySlides(index) {
+        if (slides.length < 2) {
+            return;
+        }
+
+        loadSlideImage((index + 1) % slides.length);
+        loadSlideImage((index - 1 + slides.length) % slides.length);
+    }
+
     slides.forEach(function (slide, i) {
         var week = slide.getAttribute('data-week');
         if (week && weekIndexMap[week] === undefined) {
@@ -230,6 +249,7 @@ puppyCarousels.forEach(function (carousel) {
     });
 
     function setActive(index) {
+        loadSlideImage(index);
         slides.forEach(function (slide, i) {
             slide.classList.toggle('is-active', i === index);
         });
@@ -245,6 +265,7 @@ puppyCarousels.forEach(function (carousel) {
             });
         }
         current = index;
+        preloadNearbySlides(index);
     }
 
     if (dotsContainer) {
@@ -394,7 +415,7 @@ if (puppyCardImages.length) {
             var slides = carousel ? carousel.querySelectorAll('.puppy-card-slide img') : [];
             puppyLightboxItems = Array.prototype.map.call(slides, function (slideImg) {
                 return {
-                    src: slideImg.getAttribute('src'),
+                    src: slideImg.getAttribute('src') || slideImg.getAttribute('data-src'),
                     alt: slideImg.getAttribute('alt')
                 };
             });
