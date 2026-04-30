@@ -11,7 +11,6 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logo.png" alt="Fairchild Doodles" class="nav-logo__img">Fairchild <strong>Doodles</strong></a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -29,254 +28,36 @@
         </ul>
     </nav>
 
-    <!-- Page Header -->
     <header class="page-header">
         <div class="page-header-content">
             <div class="page-header-main">
-                <h1>Available Puppies</h1>
-                <p>Born February 5, 2026 • Weekly photo updates</p>
+                <h1 id="puppiesHeaderTitle">Available Puppies</h1>
+                <p id="puppiesHeaderSubtitle">Loading the current litter.</p>
             </div>
             <div class="page-header-info">
-                <span class="section-label">Current Litter</span>
-                <h2>Meet the Puppies</h2>
-                <p>They are named by their bow color for now. Each card includes a mini slideshow of their current photos.</p>
+                <span class="section-label" id="puppiesInfoLabel">Current Litter</span>
+                <h2 id="puppiesInfoTitle">Meet the Puppies</h2>
+                <p id="puppiesInfoBody">Fetching current puppy records and photo updates.</p>
             </div>
         </div>
     </header>
 
-    <!-- Attention Banner -->
-    <section class="attention-banner">
-        <p><strong>New litter has arrived. Girls are $1200, boys are $1000. Ready for new homes by April 2nd.</strong></p>
+    <section class="attention-banner" id="puppiesBannerSection">
+        <p id="puppiesBannerText"></p>
     </section>
 
     <section class="puppies-availability">
-        <div class="puppy-baseball-grid">
-            <article class="puppy-baseball-card fade-in">
-                <div class="puppy-card-carousel puppy-card-carousel--sold" data-interval="5000">
-                    <div class="puppy-card-sold-banner" aria-label="Sold puppy banner">SOLD!</div>
-                    <div class="puppy-card-slides">
-                        <figure class="puppy-card-slide is-active" data-week="Week 3">
-                            <img src="Pictures/Recent_Litters/Born_20260205/Girl_PinkBow_1_Week3.jpeg" alt="Pink bow girl puppy, week 3 photo 1" decoding="async" fetchpriority="high">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PinkBow_1_Week2.jpeg" alt="Pink bow girl puppy, week 2 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PinkBow_2_Week2.jpeg" alt="Pink bow girl puppy, week 2 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PinkBow_1_Week1.jpeg" alt="Pink bow girl puppy, week 1 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PinkBow_2_Week1.jpeg" alt="Pink bow girl puppy, week 1 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                    </div>
-                    <button class="puppy-card-arrow puppy-card-prev" type="button" aria-label="Previous photo">‹</button>
-                    <button class="puppy-card-arrow puppy-card-next" type="button" aria-label="Next photo">›</button>
-                    <div class="puppy-card-dots"></div>
-                </div>
-                <div class="puppy-card-body">
-                    <h3>Pink Bow Girl</h3>
-                    <p class="puppy-card-meta">Female • $1200</p>
-                    <div class="puppy-card-tags">
-                        <button class="puppy-week-jump" type="button" data-week="Week 3">Week 3</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 2">Week 2</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 1">Week 1</button>
-                        <span>Born Feb 5, 2026</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="puppy-baseball-card fade-in">
-                <div class="puppy-card-carousel" data-interval="5000">
-                    <div class="puppy-card-available-banner" aria-label="Available puppy banner">AVAILABLE!</div>
-                    <div class="puppy-card-slides">
-                        <figure class="puppy-card-slide is-active" data-week="Week 3">
-                            <img src="Pictures/Recent_Litters/Born_20260205/Girl_PurpleBow_1_Week3.jpeg" alt="Purple bow girl puppy, week 3 photo 1" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PurpleBow_1_Week2.jpeg" alt="Purple bow girl puppy, week 2 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PurpleBow_2_Week2.jpeg" alt="Purple bow girl puppy, week 2 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PurpleBow_1_Week1.jpeg" alt="Purple bow girl puppy, week 1 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_PurpleBow_2_Week1.jpeg" alt="Purple bow girl puppy, week 1 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                    </div>
-                    <button class="puppy-card-arrow puppy-card-prev" type="button" aria-label="Previous photo">‹</button>
-                    <button class="puppy-card-arrow puppy-card-next" type="button" aria-label="Next photo">›</button>
-                    <div class="puppy-card-dots"></div>
-                </div>
-                <div class="puppy-card-body">
-                    <h3>Purple Bow Girl</h3>
-                    <p class="puppy-card-meta">Female • $1200</p>
-                    <div class="puppy-card-tags">
-                        <button class="puppy-week-jump" type="button" data-week="Week 3">Week 3</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 2">Week 2</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 1">Week 1</button>
-                        <span>Born Feb 5, 2026</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="puppy-baseball-card fade-in">
-                <div class="puppy-card-carousel puppy-card-carousel--sold" data-interval="5000">
-                    <div class="puppy-card-sold-banner" aria-label="Sold puppy banner">SOLD!</div>
-                    <div class="puppy-card-slides">
-                        <figure class="puppy-card-slide is-active" data-week="Week 3">
-                            <img src="Pictures/Recent_Litters/Born_20260205/Girl_YellowBow_1_Week3.jpeg" alt="Yellow bow girl puppy, week 3 photo 1" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_YellowBow_1_Week2.jpeg" alt="Yellow bow girl puppy, week 2 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_YellowBow_2_Week2.jpeg" alt="Yellow bow girl puppy, week 2 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_YellowBow_1_Week1.jpeg" alt="Yellow bow girl puppy, week 1 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Girl_YellowBow_2_Week1.jpeg" alt="Yellow bow girl puppy, week 1 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                    </div>
-                    <button class="puppy-card-arrow puppy-card-prev" type="button" aria-label="Previous photo">‹</button>
-                    <button class="puppy-card-arrow puppy-card-next" type="button" aria-label="Next photo">›</button>
-                    <div class="puppy-card-dots"></div>
-                </div>
-                <div class="puppy-card-body">
-                    <h3>Yellow Bow Girl</h3>
-                    <p class="puppy-card-meta">Female • $1200</p>
-                    <div class="puppy-card-tags">
-                        <button class="puppy-week-jump" type="button" data-week="Week 3">Week 3</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 2">Week 2</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 1">Week 1</button>
-                        <span>Born Feb 5, 2026</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="puppy-baseball-card fade-in">
-                <div class="puppy-card-carousel puppy-card-carousel--sold" data-interval="5000">
-                    <div class="puppy-card-sold-banner" aria-label="Sold puppy banner">SOLD!</div>
-                    <div class="puppy-card-slides">
-                        <figure class="puppy-card-slide is-active" data-week="Week 3">
-                            <img src="Pictures/Recent_Litters/Born_20260205/Boy_RedBow_1_Week3.jpeg" alt="Red bow boy puppy, week 3 photo 1" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_RedBow_1_Week2.jpeg" alt="Red bow boy puppy, week 2 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_RedBow_2_Week2.jpeg" alt="Red bow boy puppy, week 2 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_RedBow_1_Week1.jpeg" alt="Red bow boy puppy, week 1 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_RedBow_2_Week1.jpeg" alt="Red bow boy puppy, week 1 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                    </div>
-                    <button class="puppy-card-arrow puppy-card-prev" type="button" aria-label="Previous photo">‹</button>
-                    <button class="puppy-card-arrow puppy-card-next" type="button" aria-label="Next photo">›</button>
-                    <div class="puppy-card-dots"></div>
-                </div>
-                <div class="puppy-card-body">
-                    <h3>Red Bow Boy</h3>
-                    <p class="puppy-card-meta">Male • $1000</p>
-                    <div class="puppy-card-tags">
-                        <button class="puppy-week-jump" type="button" data-week="Week 3">Week 3</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 2">Week 2</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 1">Week 1</button>
-                        <span>Born Feb 5, 2026</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="puppy-baseball-card fade-in">
-                <div class="puppy-card-carousel puppy-card-carousel--sold" data-interval="5000">
-                    <div class="puppy-card-sold-banner" aria-label="Sold puppy banner">SOLD!</div>
-                    <div class="puppy-card-slides">
-                        <figure class="puppy-card-slide is-active" data-week="Week 3">
-                            <img src="Pictures/Recent_Litters/Born_20260205/Boy_OrangeBow_1_Week3.jpeg" alt="Orange bow boy puppy, week 3 photo 1" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_OrangeBow_1_Week2.jpeg" alt="Orange bow boy puppy, week 2 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_OrangeBow_2_Week2.jpeg" alt="Orange bow boy puppy, week 2 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_OrangeBow_1_Week1.jpeg" alt="Orange bow boy puppy, week 1 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_OrangeBow_2_Week1.jpeg" alt="Orange bow boy puppy, week 1 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                    </div>
-                    <button class="puppy-card-arrow puppy-card-prev" type="button" aria-label="Previous photo">‹</button>
-                    <button class="puppy-card-arrow puppy-card-next" type="button" aria-label="Next photo">›</button>
-                    <div class="puppy-card-dots"></div>
-                </div>
-                <div class="puppy-card-body">
-                    <h3>Orange Bow Boy</h3>
-                    <p class="puppy-card-meta">Male • $1000</p>
-                    <div class="puppy-card-tags">
-                        <button class="puppy-week-jump" type="button" data-week="Week 3">Week 3</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 2">Week 2</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 1">Week 1</button>
-                        <span>Born Feb 5, 2026</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="puppy-baseball-card fade-in">
-                <div class="puppy-card-carousel puppy-card-carousel--sold" data-interval="5000">
-                    <div class="puppy-card-sold-banner" aria-label="Sold puppy banner">SOLD!</div>
-                    <div class="puppy-card-slides">
-                        <figure class="puppy-card-slide is-active" data-week="Week 3">
-                            <img src="Pictures/Recent_Litters/Born_20260205/Boy_GreenBow_1_Week3.jpeg" alt="Green bow boy puppy, week 3 photo 1" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_GreenBow_1_Week2.jpeg" alt="Green bow boy puppy, week 2 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 2">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_GreenBow_2_Week2.jpeg" alt="Green bow boy puppy, week 2 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_GreenBow_1_Week1.jpeg" alt="Green bow boy puppy, week 1 photo 1" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="puppy-card-slide" data-week="Week 1">
-                            <img data-src="Pictures/Recent_Litters/Born_20260205/Boy_GreenBow_2_Week1.jpeg" alt="Green bow boy puppy, week 1 photo 2" loading="lazy" decoding="async">
-                        </figure>
-                    </div>
-                    <button class="puppy-card-arrow puppy-card-prev" type="button" aria-label="Previous photo">‹</button>
-                    <button class="puppy-card-arrow puppy-card-next" type="button" aria-label="Next photo">›</button>
-                    <div class="puppy-card-dots"></div>
-                </div>
-                <div class="puppy-card-body">
-                    <h3>Green Bow Boy</h3>
-                    <p class="puppy-card-meta">Male • $1000</p>
-                    <div class="puppy-card-tags">
-                        <button class="puppy-week-jump" type="button" data-week="Week 3">Week 3</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 2">Week 2</button>
-                        <button class="puppy-week-jump" type="button" data-week="Week 1">Week 1</button>
-                        <span>Born Feb 5, 2026</span>
-                    </div>
-                </div>
-            </article>
-        </div>
+        <div class="admin-empty-state puppies-empty-state is-hidden" id="puppiesLoadingState">Loading the current litter.</div>
+        <div class="admin-empty-state puppies-empty-state is-hidden" id="puppiesEmptyState">No puppies are currently published.</div>
+        <div class="puppy-baseball-grid" id="puppiesGrid"></div>
     </section>
 
-    <!-- CTA Strip -->
     <section class="cta-strip fade-in">
-        <h2>Questions about this litter?</h2>
-        <p>Reach out anytime and we’ll be happy to help.</p>
-        <a href="contact.html" class="cta-button">CONTACT US</a>
+        <h2 id="puppiesCtaTitle">Questions about this litter?</h2>
+        <p id="puppiesCtaBody">Reach out anytime and we’ll be happy to help.</p>
+        <a href="contact.html" class="cta-button" id="puppiesCtaButton">CONTACT US</a>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Fairchild Doodles. All rights reserved.</p>
         <p>Ethical breeding • Vet cleared • Family raised</p>
@@ -288,5 +69,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="puppies-page.js"></script>
 </body>
 </html>

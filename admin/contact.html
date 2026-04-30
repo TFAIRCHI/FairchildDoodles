@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Contact Content - Fairchild Doodles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-admin-content-page="contact">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-logo"><img src="../logo.png" alt="Fairchild Doodles" class="nav-logo__img">Fairchild <strong>Doodles</strong></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="./">Admin</a></li>
+            <li><a href="./about.html">Edit About</a></li>
+            <li><a href="./contact.html" class="active">Edit Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header admin-page-header">
+        <div class="page-header-content">
+            <div class="page-header-main">
+                <h1>Contact Content</h1>
+                <p>Edit the Contact page information and expectation text without changing the design.</p>
+            </div>
+            <div class="page-header-info">
+                <span class="section-label">Text Blocks</span>
+                <h2>Contact Page Editor</h2>
+                <p>These fields control the contact card, business info, and the step-by-step purchase and pickup expectations.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-page">
+        <section class="admin-auth-panel fade-in">
+            <div class="admin-auth-card">
+                <div>
+                    <span class="section-label">Access</span>
+                    <h2>Admin Sign-In</h2>
+                    <p id="contentAuthSummary">Checking your login state.</p>
+                </div>
+                <div class="admin-auth-actions">
+                    <a href="/.auth/login/aad?post_login_redirect_uri=/admin/contact.html" class="cta-button" id="contentLoginButton">SIGN IN WITH MICROSOFT</a>
+                    <a href="/.auth/logout?post_logout_redirect_uri=/admin/contact.html" class="cta-button cta-button--outline" id="contentLogoutButton">SIGN OUT</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-grid fade-in admin-grid--single">
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Contact</span>
+                        <h2>Editable Copy</h2>
+                    </div>
+                </div>
+                <p class="admin-panel__intro">Update the contact card, email and phone copy, and the What to Expect sections that appear on the public Contact page.</p>
+                <p class="admin-feedback" id="contentFeedback" aria-live="polite"></p>
+                <form class="admin-form" id="contentForm">
+                    <div class="admin-form-grid" id="contentFields"></div>
+                    <div class="admin-form-actions">
+                        <button type="submit" class="cta-button">SAVE CONTACT CONTENT</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Fairchild Doodles. All rights reserved.</p>
+        <p>Ethical breeding • Vet cleared • Family raised</p>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="./content-editor.js"></script>
+</body>
+</html>

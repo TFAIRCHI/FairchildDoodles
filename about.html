@@ -11,7 +11,6 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logo.png" alt="Fairchild Doodles" class="nav-logo__img">Fairchild <strong>Doodles</strong></a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -29,40 +28,35 @@
         </ul>
     </nav>
 
-    <!-- Page Header -->
     <header class="page-header">
         <div class="page-header-content">
-            <h1>About Us</h1>
-            <p>The story behind Fairchild Doodles</p>
+            <h1 id="aboutHeaderTitle">About Us</h1>
+            <p id="aboutHeaderSubtitle">The story behind Fairchild Doodles</p>
         </div>
     </header>
 
-    <!-- Our Story -->
     <section class="about fade-in">
         <div class="about-content">
             <div class="about-text">
-                <h2>Our Story</h2>
-                <p>Fairchild Doodles started as a dream born from a deep love of dogs. What began as a family passion quickly grew into a mission — to bring thoughtfully bred, healthy, and well-socialized Doodles into the lives of loving families.</p>
-                <p>We are not a large-scale operation. We are a small, family-run breeder based right here in our community, where every puppy is whelped, raised, and cared for under our direct supervision. That means each litter gets the individual attention it deserves.</p>
-                <p>Over the years, we have refined our breeding program with one goal in mind: producing puppies that are not only beautiful, but healthy, confident, and eager to bond with their new families.</p>
+                <h2 id="aboutStoryTitle">Our Story</h2>
+                <div id="aboutStoryParagraphs"></div>
             </div>
             <div class="about-image">
-                <img src="Pictures/FamilyPortraits/Family_Portraits.PNG" alt="Our family with our doodles" class="about-photo">
+                <img src="Pictures/FamilyPortraits/Family_Portraits.PNG" alt="Our family with our doodles" class="about-photo" id="aboutStoryImage">
             </div>
         </div>
     </section>
 
-    <!-- Meet the Parents -->
     <section class="parents fade-in">
         <div class="section-header">
-            <h2>Meet the Parents</h2>
-            <p>The loving dogs behind our Doodle puppies</p>
+            <h2 id="aboutParentsSectionTitle">Meet the Parents</h2>
+            <p id="aboutParentsSectionSubtitle">The loving dogs behind our Doodle puppies</p>
         </div>
         <div class="parents-carousel-layout">
             <div class="parents-carousel" data-interval="4500">
                 <button class="parents-carousel-arrow parents-carousel-prev" type="button" aria-label="Previous photo">‹</button>
                 <button class="parents-carousel-arrow parents-carousel-next" type="button" aria-label="Next photo">›</button>
-                <div class="parents-carousel-track">
+                <div class="parents-carousel-track" id="aboutParentsCarouselTrack">
                     <div class="parents-slide is-active">
                         <img src="Pictures/parents-carousel/Sadie_Bronco_Parents.jpg" alt="Sadie and Bronco together" class="parents-slide-img">
                         <div class="parents-slide-caption">Sadie &amp; Bronco</div>
@@ -99,33 +93,31 @@
                 <div class="parents-carousel-dots" aria-label="Parents carousel controls"></div>
             </div>
             <div class="parents-info-card">
-                <h3>Meet Sadie &amp; Bronco</h3>
-                <p>Our parent pair brings together affectionate, family‑friendly temperaments and beautiful, soft coats.</p>
+                <h3 id="aboutParentsCardTitle">Meet Sadie &amp; Bronco</h3>
+                <p id="aboutParentsCardSummary">Our parent pair brings together affectionate, family‑friendly temperaments and beautiful, soft coats.</p>
                 <div class="parents-info-list">
                     <div class="parents-info-item">
-                        <h4>Sadie</h4>
-                        <p>Gentle, calm, and incredibly loving. She is a patient companion and a wonderful mom.</p>
+                        <h4 id="aboutSadieName">Sadie</h4>
+                        <p id="aboutSadieDescription">Gentle, calm, and incredibly loving. She is a patient companion and a wonderful mom.</p>
                     </div>
                     <div class="parents-info-item">
-                        <h4>Bronco</h4>
-                        <p>Playful, confident, and eager to please. He adds joyful energy and intelligence to every litter.</p>
+                        <h4 id="aboutBroncoName">Bronco</h4>
+                        <p id="aboutBroncoDescription">Playful, confident, and eager to please. He adds joyful energy and intelligence to every litter.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Strip -->
     <section class="cta-strip fade-in">
-        <h2>Interested in bringing a Doodle home?</h2>
-        <p>Browse our available puppies or reach out with any questions</p>
+        <h2 id="aboutCtaTitle">Interested in bringing a Doodle home?</h2>
+        <p id="aboutCtaBody">Browse our available puppies or reach out with any questions</p>
         <div class="cta-strip-buttons">
-            <a href="puppies.html" class="cta-button">VIEW PUPPIES</a>
-            <a href="contact.html" class="cta-button cta-button--outline">CONTACT US</a>
+            <a href="puppies.html" class="cta-button" id="aboutCtaPrimary">VIEW PUPPIES</a>
+            <a href="contact.html" class="cta-button cta-button--outline" id="aboutCtaSecondary">CONTACT US</a>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Fairchild Doodles. All rights reserved.</p>
         <p>Ethical breeding • Vet cleared • Family raised</p>
@@ -137,6 +129,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="about-page.js"></script>
 </body>
 </html>
-

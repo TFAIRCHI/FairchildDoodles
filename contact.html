@@ -11,7 +11,6 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logo.png" alt="Fairchild Doodles" class="nav-logo__img">Fairchild <strong>Doodles</strong></a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -29,111 +28,56 @@
         </ul>
     </nav>
 
-    <!-- Page Header -->
     <header class="page-header">
         <div class="page-header-content">
-            <h1>Contact Us</h1>
-            <p>We'd love to hear from you</p>
+            <h1 id="contactHeaderTitle">Contact Us</h1>
+            <p id="contactHeaderSubtitle">We'd love to hear from you</p>
         </div>
     </header>
 
-    <!-- Contact Layout -->
     <section class="contact-page">
         <div class="contact-page-grid contact-page-grid--single">
-
-            <!-- Info Column -->
             <div class="contact-info-wrapper fade-in">
-
                 <div class="contact-info-card">
-                    <h3>Get In Touch</h3>
+                    <h3 id="contactCardTitle">Get In Touch</h3>
                     <div class="contact-detail">
                         <span class="contact-detail-icon">📍</span>
                         <div>
-                            <strong>Location</strong>
-                            <p>Fairchild Doodles<br>North Augusta, South Carolina</p>
+                            <strong id="contactLocationLabel">Location</strong>
+                            <p id="contactLocationValue">Fairchild Doodles<br>North Augusta, South Carolina</p>
                         </div>
                     </div>
                     <div class="contact-detail">
                         <span class="contact-detail-icon">📧</span>
                         <div>
-                            <strong>Email</strong>
-                            <p><a href="mailto:stricklandlauren11@gmail.com">stricklandlauren11@gmail.com</a></p>
+                            <strong id="contactEmailLabel">Email</strong>
+                            <p><a href="#" id="contactEmailLink"></a></p>
                         </div>
                     </div>
                     <div class="contact-detail">
                         <span class="contact-detail-icon">📞</span>
                         <div>
-                            <strong>Phone</strong>
-                            <p>706-836-8183</p>
+                            <strong id="contactPhoneLabel">Phone</strong>
+                            <p id="contactPhoneValue">706-836-8183</p>
                         </div>
                     </div>
                     <div class="contact-detail">
                         <span class="contact-detail-icon">🕐</span>
                         <div>
-                            <strong>Response Time</strong>
-                            <p>We typically reply within 24 hours</p>
+                            <strong id="contactResponseLabel">Response Time</strong>
+                            <p id="contactResponseValue">We typically reply within 24 hours</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="contact-info-card">
-                    <h3>What to Expect</h3>
-                    <div class="expect-step">
-                        <span class="expect-number">1</span>
-                        <div>
-                            <strong>Puppies go home at 8 weeks old</strong>
-                            <p>We focus on early socialization and healthy development.</p>
-                        </div>
-                    </div>
-                    <div class="expect-step">
-                        <span class="expect-number">2</span>
-                        <div>
-                            <strong>$500 non‑refundable deposit</strong>
-                            <p>Required at selection to reserve your puppy.</p>
-                        </div>
-                    </div>
-                    <div class="expect-step">
-                        <span class="expect-number">3</span>
-                        <div>
-                            <strong>Contract signed at first visit</strong>
-                            <p>We review care expectations and answer questions.</p>
-                        </div>
-                    </div>
-                    <div class="expect-step">
-                        <span class="expect-number">4</span>
-                        <div>
-                            <strong>Puppy goes home with a blanket</strong>
-                            <p>Comfort item with familiar scent.</p>
-                        </div>
-                    </div>
-                    <div class="expect-step">
-                        <span class="expect-number">5</span>
-                        <div>
-                            <strong>Vaccines &amp; deworming</strong>
-                            <p>1 puppy vaccine and 3 rounds of dewormer completed.</p>
-                        </div>
-                    </div>
-                    <div class="expect-step">
-                        <span class="expect-number">6</span>
-                        <div>
-                            <strong>Health records at pickup</strong>
-                            <p>We provide vaccine and vet documentation.</p>
-                        </div>
-                    </div>
-                    <div class="expect-step">
-                        <span class="expect-number">7</span>
-                        <div>
-                            <strong>Ongoing updates</strong>
-                            <p>We post updates on Facebook and send personal updates.</p>
-                        </div>
-                    </div>
+                    <h3 id="contactExpectationsTitle">What to Expect</h3>
+                    <div id="contactExpectationsList"></div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Fairchild Doodles. All rights reserved.</p>
         <p>Ethical breeding • Vet cleared • Family raised</p>
@@ -145,5 +89,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="contact-page.js"></script>
 </body>
 </html>

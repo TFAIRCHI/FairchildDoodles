@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Fairchild Doodles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="nav-logo"><img src="../logo.png" alt="Fairchild Doodles" class="nav-logo__img">Fairchild <strong>Doodles</strong></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../puppies.html">Puppies</a></li>
+            <li><a href="../gallery.html">Gallery</a></li>
+            <li><a href="../allergies.html">Allergies</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="./" class="active">Admin</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header admin-page-header">
+        <div class="page-header-content">
+            <div class="page-header-main">
+                <h1>Admin Dashboard</h1>
+                <p>Manage litters, puppies, and the records that drive the public site.</p>
+            </div>
+            <div class="page-header-info">
+                <span class="section-label">Internal Use</span>
+                <h2>Content Management</h2>
+                <p>Sign in with the approved Google account to create litters, add puppies, and keep the site current without editing HTML files.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-page">
+        <section class="admin-auth-panel fade-in">
+            <div class="admin-auth-card">
+                <div>
+                    <span class="section-label">Access</span>
+                    <h2>Admin Sign-In</h2>
+                    <p id="adminAuthSummary">Checking your login state.</p>
+                </div>
+                <div class="admin-auth-actions">
+                    <a href="/.auth/login/aad?post_login_redirect_uri=/admin/" class="cta-button" id="adminLoginButton">SIGN IN WITH MICROSOFT</a>
+                    <a href="/.auth/logout?post_logout_redirect_uri=/admin/" class="cta-button cta-button--outline" id="adminLogoutButton">SIGN OUT</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-grid fade-in">
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Litters</span>
+                        <h2>Litter Management</h2>
+                    </div>
+                    <button type="button" class="cta-button cta-button--outline admin-compact-button" id="newLitterButton">NEW LITTER</button>
+                </div>
+                <p class="admin-panel__intro">Create litters, set active status, and control the default pricing and announcement copy for the puppies page.</p>
+                <p class="admin-feedback" id="litterFeedback" aria-live="polite"></p>
+                <div class="admin-list" id="litterList"></div>
+
+                <form class="admin-form" id="litterForm">
+                    <input type="hidden" id="litterId">
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="litterTitle">Litter Title</label>
+                            <input type="text" id="litterTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="litterStatus">Status</label>
+                            <select id="litterStatus">
+                                <option value="active">Active</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="litterBirthDate">Birth Date</label>
+                            <input type="date" id="litterBirthDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="litterReadyDate">Ready Date</label>
+                            <input type="date" id="litterReadyDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="litterMalePrice">Default Male Price</label>
+                            <input type="number" min="0" step="1" id="litterMalePrice">
+                        </div>
+                        <div class="form-group">
+                            <label for="litterFemalePrice">Default Female Price</label>
+                            <input type="number" min="0" step="1" id="litterFemalePrice">
+                        </div>
+                        <div class="form-group">
+                            <label for="litterDisplayOrder">Display Order</label>
+                            <input type="number" min="0" step="1" id="litterDisplayOrder">
+                        </div>
+                        <div class="form-group form-group--checkbox">
+                            <label class="admin-checkbox">
+                                <input type="checkbox" id="litterIsActive">
+                                <span>Show as current active litter</span>
+                            </label>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="litterBannerText">Banner Text</label>
+                            <textarea id="litterBannerText" rows="3"></textarea>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="litterSummaryText">Summary Text</label>
+                            <textarea id="litterSummaryText" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button type="submit" class="cta-button">SAVE LITTER</button>
+                        <button type="button" class="cta-button cta-button--outline" id="cancelLitterEditButton">CLEAR</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Puppies</span>
+                        <h2>Puppy Management</h2>
+                    </div>
+                    <button type="button" class="cta-button cta-button--outline admin-compact-button" id="newPuppyButton">NEW PUPPY</button>
+                </div>
+                <p class="admin-panel__intro">Choose a litter, then add or update the puppies, pricing, descriptions, and availability records that will drive the public puppies page.</p>
+                <div class="admin-toolbar">
+                    <div class="form-group">
+                        <label for="puppyLitterFilter">Filter by Litter</label>
+                        <select id="puppyLitterFilter"></select>
+                    </div>
+                </div>
+                <p class="admin-feedback" id="puppyFeedback" aria-live="polite"></p>
+                <div class="admin-list" id="puppyList"></div>
+
+                <form class="admin-form" id="puppyForm">
+                    <input type="hidden" id="puppyId">
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="puppyLitterId">Litter</label>
+                            <select id="puppyLitterId" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="puppyDisplayName">Display Name</label>
+                            <input type="text" id="puppyDisplayName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="puppyGender">Gender</label>
+                            <select id="puppyGender">
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="puppyColorLabel">Color / Bow Label</label>
+                            <input type="text" id="puppyColorLabel">
+                        </div>
+                        <div class="form-group">
+                            <label for="puppyPrice">Price</label>
+                            <input type="number" min="0" step="1" id="puppyPrice">
+                        </div>
+                        <div class="form-group">
+                            <label for="puppyAvailabilityStatus">Availability</label>
+                            <select id="puppyAvailabilityStatus">
+                                <option value="available">Available</option>
+                                <option value="reserved">Reserved</option>
+                                <option value="sold">Sold</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="puppyDisplayOrder">Display Order</label>
+                            <input type="number" min="0" step="1" id="puppyDisplayOrder">
+                        </div>
+                        <div class="form-group">
+                            <label for="puppyFeaturedImageId">Featured Image Id</label>
+                            <input type="text" id="puppyFeaturedImageId">
+                        </div>
+                        <div class="form-group form-group--checkbox">
+                            <label class="admin-checkbox">
+                                <input type="checkbox" id="puppyIsActive">
+                                <span>Show this puppy on the public site</span>
+                            </label>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="puppyShortSummary">Short Summary</label>
+                            <textarea id="puppyShortSummary" rows="3"></textarea>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="puppyLongDescription">Long Description</label>
+                            <textarea id="puppyLongDescription" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button type="submit" class="cta-button">SAVE PUPPY</button>
+                        <button type="button" class="cta-button cta-button--outline" id="cancelPuppyEditButton">CLEAR</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="admin-grid admin-grid--single fade-in">
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Images</span>
+                        <h2>Image Manager</h2>
+                    </div>
+                </div>
+                <p class="admin-panel__intro">Upload puppy, gallery, and site-section images into Blob Storage, then update captions, alt text, and display order from one place.</p>
+                <div class="admin-form-actions">
+                    <a href="./images.html" class="cta-button">OPEN IMAGE MANAGER</a>
+                </div>
+            </div>
+
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Page Copy</span>
+                        <h2>About &amp; Contact Editors</h2>
+                    </div>
+                </div>
+                <p class="admin-panel__intro">Use the dedicated editors for About and Contact page text. Those screens update structured text blocks while preserving the public design.</p>
+                <div class="admin-form-actions">
+                    <a href="./images.html" class="cta-button cta-button--outline">IMAGE MANAGER</a>
+                    <a href="./about.html" class="cta-button">EDIT ABOUT CONTENT</a>
+                    <a href="./contact.html" class="cta-button cta-button--outline">EDIT CONTACT CONTENT</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Fairchild Doodles. All rights reserved.</p>
+        <p>Ethical breeding • Vet cleared • Family raised</p>
+        <div class="social-links">
+            <a href="../contact.html">Contact</a>
+            <a href="../puppies.html">Puppies</a>
+            <a href="./">Admin</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="./admin.js"></script>
+</body>
+</html>

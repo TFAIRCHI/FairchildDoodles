@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Image Manager - Fairchild Doodles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-logo"><img src="../logo.png" alt="Fairchild Doodles" class="nav-logo__img">Fairchild <strong>Doodles</strong></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../gallery.html">Gallery</a></li>
+            <li><a href="./">Admin</a></li>
+            <li><a href="./images.html" class="active">Image Manager</a></li>
+            <li><a href="./about.html">Edit About</a></li>
+            <li><a href="./contact.html">Edit Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header admin-page-header">
+        <div class="page-header-content">
+            <div class="page-header-main">
+                <h1>Image Manager</h1>
+                <p>Upload, organize, and edit image metadata for puppies, gallery entries, and approved site sections.</p>
+            </div>
+            <div class="page-header-info">
+                <span class="section-label">Media Library</span>
+                <h2>Blob-Backed Images</h2>
+                <p>This screen sends images into Azure Blob Storage and stores the display metadata in the site database records.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-page">
+        <section class="admin-auth-panel fade-in">
+            <div class="admin-auth-card">
+                <div>
+                    <span class="section-label">Access</span>
+                    <h2>Admin Sign-In</h2>
+                    <p id="imageAuthSummary">Checking your login state.</p>
+                </div>
+                <div class="admin-auth-actions">
+                    <a href="/.auth/login/aad?post_login_redirect_uri=/admin/images.html" class="cta-button" id="imageLoginButton">SIGN IN WITH MICROSOFT</a>
+                    <a href="/.auth/logout?post_logout_redirect_uri=/admin/images.html" class="cta-button cta-button--outline" id="imageLogoutButton">SIGN OUT</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-grid fade-in">
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Upload</span>
+                        <h2>New Image</h2>
+                    </div>
+                </div>
+                <p class="admin-panel__intro">Upload a new image and attach it to a puppy, the gallery, or a site section. The current upload flow is optimized for normal admin-sized images rather than huge raw files.</p>
+                <p class="admin-feedback" id="imageUploadFeedback" aria-live="polite"></p>
+                <form class="admin-form" id="imageUploadForm">
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="imageOwnerType">Owner Type</label>
+                            <select id="imageOwnerType">
+                                <option value="puppy">Puppy</option>
+                                <option value="gallery">Gallery</option>
+                                <option value="site-section">Site Section</option>
+                                <option value="litter">Litter</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageOwnerId">Owner Record</label>
+                            <select id="imageOwnerId"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageSectionKey">Section Key</label>
+                            <input type="text" id="imageSectionKey" placeholder="about.story.image or home.parents.carousel">
+                        </div>
+                        <div class="form-group">
+                            <label for="imageWeekLabel">Week Label</label>
+                            <input type="text" id="imageWeekLabel" placeholder="Week 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="imageDisplayOrder">Display Order</label>
+                            <input type="number" min="0" step="1" id="imageDisplayOrder">
+                        </div>
+                        <div class="form-group form-group--checkbox">
+                            <label class="admin-checkbox">
+                                <input type="checkbox" id="imageIsActive" checked>
+                                <span>Publish this image immediately</span>
+                            </label>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="imageFile">Image File</label>
+                            <input type="file" id="imageFile" accept="image/*" required>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="imageAltText">Alt Text</label>
+                            <textarea id="imageAltText" rows="3"></textarea>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="imageCaption">Caption</label>
+                            <textarea id="imageCaption" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button type="submit" class="cta-button">UPLOAD IMAGE</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Library</span>
+                        <h2>Image Records</h2>
+                    </div>
+                </div>
+                <p class="admin-panel__intro">Filter the library, inspect blob-backed images, and update metadata like alt text, captions, order, or active state.</p>
+                <div class="admin-toolbar admin-toolbar--images">
+                    <div class="form-group">
+                        <label for="imageFilterOwnerType">Filter Owner Type</label>
+                        <select id="imageFilterOwnerType">
+                            <option value="">All</option>
+                            <option value="puppy">Puppy</option>
+                            <option value="gallery">Gallery</option>
+                            <option value="site-section">Site Section</option>
+                            <option value="litter">Litter</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageFilterOwnerId">Filter Owner Record</label>
+                        <select id="imageFilterOwnerId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageFilterSectionKey">Filter Section Key</label>
+                        <input type="text" id="imageFilterSectionKey" placeholder="Optional section key">
+                    </div>
+                    <div class="form-group admin-toolbar__button">
+                        <button type="button" class="cta-button cta-button--outline admin-compact-button" id="refreshImagesButton">REFRESH</button>
+                    </div>
+                </div>
+                <p class="admin-feedback" id="imageLibraryFeedback" aria-live="polite"></p>
+                <div class="admin-image-grid" id="imageLibrary"></div>
+            </div>
+        </section>
+
+        <section class="admin-grid admin-grid--single fade-in">
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <span class="section-label">Metadata</span>
+                        <h2>Edit Image Details</h2>
+                    </div>
+                </div>
+                <p class="admin-panel__intro">Select an image from the library to edit its alt text, caption, display order, week label, or publish state.</p>
+                <p class="admin-feedback" id="imageEditFeedback" aria-live="polite"></p>
+                <form class="admin-form" id="imageEditForm">
+                    <input type="hidden" id="editImageId">
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="editImageOwnerType">Owner Type</label>
+                            <input type="text" id="editImageOwnerType" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editImageOwnerId">Owner Id</label>
+                            <input type="text" id="editImageOwnerId" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editImageSectionKey">Section Key</label>
+                            <input type="text" id="editImageSectionKey">
+                        </div>
+                        <div class="form-group">
+                            <label for="editImageWeekLabel">Week Label</label>
+                            <input type="text" id="editImageWeekLabel">
+                        </div>
+                        <div class="form-group">
+                            <label for="editImageDisplayOrder">Display Order</label>
+                            <input type="number" min="0" step="1" id="editImageDisplayOrder">
+                        </div>
+                        <div class="form-group form-group--checkbox">
+                            <label class="admin-checkbox">
+                                <input type="checkbox" id="editImageIsActive">
+                                <span>Image is active</span>
+                            </label>
+                        </div>
+                        <div class="form-group form-group--checkbox">
+                            <label class="admin-checkbox">
+                                <input type="checkbox" id="editImageFeatured">
+                                <span>Use as featured image</span>
+                            </label>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="editImageAltText">Alt Text</label>
+                            <textarea id="editImageAltText" rows="3"></textarea>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="editImageCaption">Caption</label>
+                            <textarea id="editImageCaption" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button type="submit" class="cta-button">SAVE IMAGE METADATA</button>
+                        <button type="button" class="cta-button cta-button--outline" id="clearImageEditButton">CLEAR</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Fairchild Doodles. All rights reserved.</p>
+        <p>Ethical breeding • Vet cleared • Family raised</p>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="./images.js"></script>
+</body>
+</html>

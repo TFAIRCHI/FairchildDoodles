@@ -120,88 +120,102 @@ function showSuccess() {
 // ============================================
 var parentsCarousels = document.querySelectorAll('.parents-carousel');
 
-parentsCarousels.forEach(function (carousel) {
-    var slides = carousel.querySelectorAll('.parents-slide');
-    var dotsContainer = carousel.querySelector('.parents-carousel-dots');
-    var interval = parseInt(carousel.getAttribute('data-interval') || '4500', 10);
-    var current = 0;
-    var timerId = null;
+function initializeParentsCarousels() {
+    var carousels = document.querySelectorAll('.parents-carousel');
 
-    if (!slides.length || !dotsContainer) {
-        return;
-    }
-
-    function setActive(index) {
-        slides.forEach(function (slide, i) {
-            slide.classList.toggle('is-active', i === index);
-        });
-        dotsContainer.querySelectorAll('button').forEach(function (dot, i) {
-            dot.classList.toggle('is-active', i === index);
-        });
-        current = index;
-    }
-
-    slides.forEach(function (_, i) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.setAttribute('aria-label', 'Show slide ' + (i + 1));
-        dot.addEventListener('click', function () {
-            stopAuto();
-            setActive(i);
-            startAuto();
-        });
-        dotsContainer.appendChild(dot);
-    });
-
-    function next() {
-        var nextIndex = (current + 1) % slides.length;
-        setActive(nextIndex);
-    }
-
-    function prev() {
-        var prevIndex = (current - 1 + slides.length) % slides.length;
-        setActive(prevIndex);
-    }
-
-    function startAuto() {
-        if (timerId) {
+    carousels.forEach(function (carousel) {
+        if (carousel.getAttribute('data-enhanced') === 'true') {
             return;
         }
-        timerId = setInterval(next, interval);
-    }
 
-    function stopAuto() {
-        if (timerId) {
-            clearInterval(timerId);
-            timerId = null;
+        var slides = carousel.querySelectorAll('.parents-slide');
+        var dotsContainer = carousel.querySelector('.parents-carousel-dots');
+        var interval = parseInt(carousel.getAttribute('data-interval') || '4500', 10);
+        var current = 0;
+        var timerId = null;
+
+        if (!slides.length || !dotsContainer) {
+            return;
         }
-    }
 
-    setActive(0);
-    startAuto();
+        carousel.setAttribute('data-enhanced', 'true');
+        dotsContainer.innerHTML = '';
 
-    var prevBtn = carousel.querySelector('.parents-carousel-prev');
-    var nextBtn = carousel.querySelector('.parents-carousel-next');
+        function setActive(index) {
+            slides.forEach(function (slide, i) {
+                slide.classList.toggle('is-active', i === index);
+            });
+            dotsContainer.querySelectorAll('button').forEach(function (dot, i) {
+                dot.classList.toggle('is-active', i === index);
+            });
+            current = index;
+        }
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function () {
-            stopAuto();
-            prev();
-            startAuto();
+        slides.forEach(function (_, i) {
+            var dot = document.createElement('button');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', 'Show slide ' + (i + 1));
+            dot.addEventListener('click', function () {
+                stopAuto();
+                setActive(i);
+                startAuto();
+            });
+            dotsContainer.appendChild(dot);
         });
-    }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-            stopAuto();
-            next();
-            startAuto();
-        });
-    }
+        function next() {
+            var nextIndex = (current + 1) % slides.length;
+            setActive(nextIndex);
+        }
 
-    carousel.addEventListener('mouseenter', stopAuto);
-    carousel.addEventListener('mouseleave', startAuto);
-});
+        function prev() {
+            var prevIndex = (current - 1 + slides.length) % slides.length;
+            setActive(prevIndex);
+        }
+
+        function startAuto() {
+            if (timerId) {
+                return;
+            }
+            timerId = setInterval(next, interval);
+        }
+
+        function stopAuto() {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+        }
+
+        setActive(0);
+        startAuto();
+
+        var prevBtn = carousel.querySelector('.parents-carousel-prev');
+        var nextBtn = carousel.querySelector('.parents-carousel-next');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function () {
+                stopAuto();
+                prev();
+                startAuto();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+                stopAuto();
+                next();
+                startAuto();
+            });
+        }
+
+        carousel.addEventListener('mouseenter', stopAuto);
+        carousel.addEventListener('mouseleave', startAuto);
+    });
+}
+
+initializeParentsCarousels();
+document.addEventListener('parents-carousel-updated', initializeParentsCarousels);
 
 // ============================================
 // Puppy Card Carousels (puppies.html only)
@@ -345,6 +359,155 @@ puppyCarousels.forEach(function (carousel) {
 
     carousel.addEventListener('mouseenter', stopAuto);
     carousel.addEventListener('mouseleave', startAuto);
+});
+
+document.addEventListener('puppies-page-rendered', function () {
+    var freshCarousels = document.querySelectorAll('.puppy-card-carousel');
+
+    freshCarousels.forEach(function (carousel) {
+        if (carousel.getAttribute('data-enhanced') === 'true') {
+            return;
+        }
+
+        carousel.setAttribute('data-enhanced', 'true');
+
+        var slides = carousel.querySelectorAll('.puppy-card-slide');
+        var dotsContainer = carousel.querySelector('.puppy-card-dots');
+        var interval = parseInt(carousel.getAttribute('data-interval') || '5000', 10);
+        var current = 0;
+        var timerId = null;
+        var card = carousel.closest('.puppy-baseball-card');
+        var weekButtons = card ? card.querySelectorAll('.puppy-week-jump') : [];
+        var weekIndexMap = {};
+
+        if (!slides.length) {
+            return;
+        }
+
+        function loadSlideImage(index) {
+            var slide = slides[index];
+            var img = slide ? slide.querySelector('img[data-src]') : null;
+
+            if (img) {
+                img.src = img.getAttribute('data-src');
+                img.removeAttribute('data-src');
+            }
+        }
+
+        function preloadNearbySlides(index) {
+            if (slides.length < 2) {
+                return;
+            }
+
+            loadSlideImage((index + 1) % slides.length);
+            loadSlideImage((index - 1 + slides.length) % slides.length);
+        }
+
+        slides.forEach(function (slide, i) {
+            var week = slide.getAttribute('data-week');
+            if (week && weekIndexMap[week] === undefined) {
+                weekIndexMap[week] = i;
+            }
+        });
+
+        function setActive(index) {
+            loadSlideImage(index);
+            slides.forEach(function (slide, i) {
+                slide.classList.toggle('is-active', i === index);
+            });
+            if (dotsContainer) {
+                dotsContainer.querySelectorAll('button').forEach(function (dot, i) {
+                    dot.classList.toggle('is-active', i === index);
+                });
+            }
+            if (weekButtons.length) {
+                var activeWeek = slides[index].getAttribute('data-week');
+                weekButtons.forEach(function (button) {
+                    button.classList.toggle('is-active', button.getAttribute('data-week') === activeWeek);
+                });
+            }
+            current = index;
+            preloadNearbySlides(index);
+        }
+
+        if (dotsContainer && dotsContainer.children.length === 0) {
+            slides.forEach(function (_, i) {
+                var dot = document.createElement('button');
+                dot.type = 'button';
+                dot.setAttribute('aria-label', 'Show photo ' + (i + 1));
+                dot.addEventListener('click', function () {
+                    stopAuto();
+                    setActive(i);
+                    startAuto();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        if (weekButtons.length) {
+            weekButtons.forEach(function (button) {
+                var week = button.getAttribute('data-week');
+                if (weekIndexMap[week] === undefined) {
+                    button.disabled = true;
+                    return;
+                }
+                button.addEventListener('click', function () {
+                    stopAuto();
+                    setActive(weekIndexMap[week]);
+                    startAuto();
+                });
+            });
+        }
+
+        function next() {
+            var nextIndex = (current + 1) % slides.length;
+            setActive(nextIndex);
+        }
+
+        function prev() {
+            var prevIndex = (current - 1 + slides.length) % slides.length;
+            setActive(prevIndex);
+        }
+
+        function startAuto() {
+            if (timerId) {
+                return;
+            }
+            timerId = setInterval(next, interval);
+        }
+
+        function stopAuto() {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+        }
+
+        setActive(0);
+        startAuto();
+
+        var prevBtn = carousel.querySelector('.puppy-card-prev');
+        var nextBtn = carousel.querySelector('.puppy-card-next');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function () {
+                stopAuto();
+                prev();
+                startAuto();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+                stopAuto();
+                next();
+                startAuto();
+            });
+        }
+
+        carousel.addEventListener('mouseenter', stopAuto);
+        carousel.addEventListener('mouseleave', startAuto);
+    });
 });
 
 // ============================================

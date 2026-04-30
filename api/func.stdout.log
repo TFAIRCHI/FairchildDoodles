@@ -1,0 +1,45 @@
+
+
+Azure Functions Core Tools
+Core Tools Version:       4.7.0+af9404fa5872d8fa5fa2454a7cfeb2ee0cda2832 (64-bit)
+Function Runtime Version: 4.1045.200.25556
+
+[2026-04-30T12:09:04.409Z] Worker process started and initialized.
+
+Functions:
+
+	admin-images-detail-update: [GET,PUT] http://localhost:7072/api/manage/images/{id}
+
+	admin-images-list-upload: [GET,POST] http://localhost:7072/api/manage/images
+
+	admin-litters-detail-update: [GET,PUT] http://localhost:7072/api/manage/litters/{id}
+
+	admin-litters-list-create: [GET,POST] http://localhost:7072/api/manage/litters
+
+	admin-me: [GET] http://localhost:7072/api/manage/me
+
+	admin-puppies-detail-update: [GET,PUT] http://localhost:7072/api/manage/puppies/{id}
+
+	admin-puppies-list-create: [GET,POST] http://localhost:7072/api/manage/puppies
+
+	admin-storage-status: [GET] http://localhost:7072/api/manage/storage-status
+
+	admin-table-status: [GET] http://localhost:7072/api/manage/table-status
+
+	admin-text-blocks-detail-update: [GET,PUT] http://localhost:7072/api/manage/text-blocks/{id}
+
+	admin-text-blocks-list-create: [GET,POST] http://localhost:7072/api/manage/text-blocks
+
+	public-about-page: [GET] http://localhost:7072/api/public/about-page
+
+	public-contact-page: [GET] http://localhost:7072/api/public/contact-page
+
+	public-gallery-page: [GET] http://localhost:7072/api/public/gallery-page
+
+	public-home-page: [GET] http://localhost:7072/api/public/home-page
+
+	public-puppies-page: [GET] http://localhost:7072/api/public/puppies-page
+
+For detailed output, run func with --verbose flag.
+[2026-04-30T12:09:05.423Z] Executing 'Functions.public-about-page' (Reason='This function was programmatically called via the host APIs.', Id=f0b34654-858c-472c-a3d1-2031d88e5277)
+[2026-04-30T12:09:05.744Z] Executed 'Functions.public-about-page' (Succeeded, Id=f0b34654-858c-472c-a3d1-2031d88e5277, Duration=334ms)
