@@ -13,6 +13,16 @@ function parseClientPrincipal(request) {
   }
 }
 
+function getPrincipalRoles(principal) {
+  if (!Array.isArray(principal?.userRoles)) {
+    return [];
+  }
+
+  return principal.userRoles
+    .map((role) => String(role || "").trim().toLowerCase())
+    .filter(Boolean);
+}
+
 function getConfiguredAdminEmails() {
   const raw = process.env.ADMIN_EMAILS ?? "";
 
@@ -23,7 +33,17 @@ function getConfiguredAdminEmails() {
 }
 
 function isAuthorizedAdmin(principal) {
-  if (!principal?.userDetails) {
+  if (!principal) {
+    return false;
+  }
+
+  const roles = getPrincipalRoles(principal);
+
+  if (roles.includes("admin")) {
+    return true;
+  }
+
+  if (!principal.userDetails) {
     return false;
   }
 
@@ -38,6 +58,7 @@ function isAuthorizedAdmin(principal) {
 
 module.exports = {
   getConfiguredAdminEmails,
+  getPrincipalRoles,
   isAuthorizedAdmin,
   parseClientPrincipal
 };
