@@ -1866,6 +1866,13 @@ section {
     margin-top:.9rem;
 }
 
+.admin-record-card__badge-group {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:.45rem;
+}
+
 .admin-badge {
     display:inline-flex;
     align-items:center;
@@ -1897,6 +1904,12 @@ section {
     color:#a12632;
     background:#f3d7dc;
     border-color:rgba(161,38,50,.12);
+}
+
+.admin-badge.is-hidden {
+    color:var(--navy-mid);
+    background:rgba(154,170,184,.18);
+    border-color:rgba(43,61,79,.12);
 }
 
 .admin-empty-state {

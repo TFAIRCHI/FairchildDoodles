@@ -147,7 +147,10 @@
                             '<h3>' + escapeHtml(puppy.displayName) + '</h3>' +
                             '<p>' + escapeHtml(findLitterTitle(puppy.litterId)) + ' • ' + escapeHtml(puppy.gender || "Gender not set") + '</p>' +
                         '</div>' +
-                        '<span class="admin-badge ' + availabilityBadgeClass(puppy.availabilityStatus) + '">' + escapeHtml(puppy.availabilityStatus || "available") + '</span>' +
+                        '<div class="admin-record-card__badge-group">' +
+                            '<span class="admin-badge ' + publicationBadgeClass(puppy.isActive) + '">' + publicationBadgeLabel(puppy.isActive) + '</span>' +
+                            '<span class="admin-badge ' + availabilityBadgeClass(puppy.availabilityStatus) + '">' + escapeHtml(puppy.availabilityStatus || "available") + '</span>' +
+                        '</div>' +
                     '</div>' +
                     '<div class="admin-record-card__meta">' +
                         '<span>Price: ' + formatMoney(puppy.price) + '</span>' +
@@ -268,6 +271,14 @@
         }
 
         return "is-live";
+    }
+
+    function publicationBadgeClass(isActive) {
+        return isActive ? "is-live" : "is-hidden";
+    }
+
+    function publicationBadgeLabel(isActive) {
+        return isActive ? "published" : "hidden";
     }
 
     function collectLitterFormData() {
