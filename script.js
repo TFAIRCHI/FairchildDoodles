@@ -80,6 +80,40 @@ if (homeIntro) {
 }
 
 // ============================================
+// Shared Active-Litter Banner
+// ============================================
+var liveLitterBanners = document.querySelectorAll('[data-live-litter-banner]');
+
+if (liveLitterBanners.length > 0) {
+    fetch('/api/public/current-litter-banner')
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+            if (!data || !data.banner || !data.banner.isVisible || !data.banner.text) {
+                return;
+            }
+
+            liveLitterBanners.forEach(function (banner) {
+                var textTarget = banner.querySelector('[data-live-litter-banner-text]');
+                var ctaTarget = banner.querySelector('[data-live-litter-banner-cta]');
+
+                if (textTarget) {
+                    textTarget.textContent = data.banner.text;
+                }
+
+                if (ctaTarget) {
+                    ctaTarget.textContent = data.banner.ctaLabel || ctaTarget.textContent;
+                    ctaTarget.setAttribute('href', data.banner.ctaHref || ctaTarget.getAttribute('href') || 'puppies.html');
+                }
+
+                banner.classList.remove('is-hidden');
+            });
+        })
+        .catch(function () {
+            // Leave the banners hidden when the endpoint is unavailable.
+        });
+}
+
+// ============================================
 // Scroll-Triggered Fade-In Animations
 // ============================================
 const observerOptions = {

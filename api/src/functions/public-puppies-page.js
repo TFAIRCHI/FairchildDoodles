@@ -3,59 +3,7 @@ const { json } = require("../shared/response");
 const { getCurrentActiveLitter } = require("../shared/litters");
 const { listPuppies } = require("../shared/puppies");
 const { listImages } = require("../shared/images");
-
-function formatDisplayDate(isoDate) {
-  if (!isoDate) {
-    return "";
-  }
-
-  const date = new Date(`${isoDate}T00:00:00`);
-
-  if (Number.isNaN(date.getTime())) {
-    return isoDate;
-  }
-
-  return date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric"
-  });
-}
-
-function buildHeaderSubtitle(litter) {
-  const parts = [];
-
-  if (litter.birthDate) {
-    parts.push(`Born ${formatDisplayDate(litter.birthDate)}`);
-  }
-
-  if (litter.readyDate) {
-    parts.push(`Ready for homes ${formatDisplayDate(litter.readyDate)}`);
-  }
-
-  return parts.join(" • ") || "Current litter information";
-}
-
-function buildBannerText(litter) {
-  if (litter.bannerText) {
-    return litter.bannerText;
-  }
-
-  const priceParts = [];
-
-  if (litter.defaultFemalePrice != null) {
-    priceParts.push(`Girls are $${Number(litter.defaultFemalePrice).toLocaleString()}`);
-  }
-
-  if (litter.defaultMalePrice != null) {
-    priceParts.push(`Boys are $${Number(litter.defaultMalePrice).toLocaleString()}`);
-  }
-
-  const readyPart = litter.readyDate ? `Ready for new homes by ${formatDisplayDate(litter.readyDate)}.` : "";
-  const priceText = priceParts.length ? `${priceParts.join(", ")}.` : "";
-
-  return [priceText, readyPart].filter(Boolean).join(" ").trim();
-}
+const { buildBannerText, buildHeaderSubtitle, formatDisplayDate } = require("../shared/public-litter");
 
 function mapPuppyCard(puppy, litter, images) {
   const sortedImages = [...images].sort((left, right) => {
