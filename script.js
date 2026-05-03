@@ -18,6 +18,68 @@ if (navToggle && navLinks) {
 }
 
 // ============================================
+// Home Intro Overlay (index.html only)
+// ============================================
+var homeIntro = document.getElementById('homeIntro');
+
+if (homeIntro) {
+    var introSkipButton = document.getElementById('homeIntroSkip');
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var introStorageKey = 'fairchildDoodlesHomeIntroSeen';
+    var introHasPlayed = false;
+
+    try {
+        introHasPlayed = window.sessionStorage.getItem(introStorageKey) === 'true';
+    } catch (error) {
+        introHasPlayed = false;
+    }
+
+    function markIntroSeen() {
+        try {
+            window.sessionStorage.setItem(introStorageKey, 'true');
+        } catch (error) {
+            // Ignore storage issues and continue.
+        }
+    }
+
+    function finishHomeIntro(immediate) {
+        if (homeIntro.classList.contains('is-hidden')) {
+            return;
+        }
+
+        markIntroSeen();
+        document.body.classList.remove('home-intro-active');
+
+        if (immediate) {
+            homeIntro.classList.add('is-hidden');
+            return;
+        }
+
+        homeIntro.classList.add('is-hidden');
+    }
+
+    if (prefersReducedMotion || introHasPlayed) {
+        finishHomeIntro(true);
+    } else {
+        document.body.classList.add('home-intro-active');
+
+        window.setTimeout(function () {
+            homeIntro.classList.add('is-playing');
+        }, 120);
+
+        window.setTimeout(function () {
+            finishHomeIntro(false);
+        }, 4700);
+
+        if (introSkipButton) {
+            introSkipButton.addEventListener('click', function () {
+                finishHomeIntro(false);
+            });
+        }
+    }
+}
+
+// ============================================
 // Scroll-Triggered Fade-In Animations
 // ============================================
 const observerOptions = {
