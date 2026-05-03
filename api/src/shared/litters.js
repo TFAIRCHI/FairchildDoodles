@@ -150,6 +150,8 @@ function buildLitterEntity(payload, principal, existingEntity = null) {
   const now = new Date().toISOString();
   const rowKey = existingEntity?.rowKey ?? payload.id ?? crypto.randomUUID();
   const createdAt = existingEntity?.createdAt ?? now;
+  const normalizedStatus = payload.status;
+  const isActive = normalizedStatus === "active" ? payload.isActive : false;
 
   return {
     partitionKey: LITTER_PARTITION_KEY,
@@ -157,13 +159,13 @@ function buildLitterEntity(payload, principal, existingEntity = null) {
     title: payload.title,
     birthDate: payload.birthDate,
     readyDate: payload.readyDate,
-    status: payload.status,
+    status: normalizedStatus,
     bannerText: payload.bannerText,
     summaryText: payload.summaryText,
     defaultMalePrice: payload.defaultMalePrice,
     defaultFemalePrice: payload.defaultFemalePrice,
     displayOrder: payload.displayOrder,
-    isActive: payload.isActive,
+    isActive,
     createdAt,
     updatedAt: now,
     updatedBy: principal?.userDetails ?? ""
@@ -213,19 +215,43 @@ async function getLitterById(id) {
 
 async function getCurrentActiveLitter() {
   const litters = await listLitters();
+  const activeStatusLitters = litters.filter((litter) => litter.status === "active");
 
-  const explicitActive = litters.find((litter) => litter.isActive);
+  const explicitActive = activeStatusLitters.find((litter) => litter.isActive);
 
   if (explicitActive) {
     return explicitActive;
   }
 
-  return litters.find((litter) => litter.status === "active") ?? null;
+  return activeStatusLitters[0] ?? null;
+}
+
+async function clearActiveFlagFromOtherLitters(currentLitterId) {
+  const client = getTableClients().litters;
+
+  for await (const entity of client.listEntities({
+    queryOptions: {
+      filter: `PartitionKey eq '${LITTER_PARTITION_KEY}' and isActive eq true`
+    }
+  })) {
+    if (entity.rowKey === currentLitterId) {
+      continue;
+    }
+
+    entity.isActive = false;
+    entity.updatedAt = new Date().toISOString();
+    await client.updateEntity(entity, "Replace");
+  }
 }
 
 async function createLitter(payload, principal) {
   const client = getTableClients().litters;
   const entity = buildLitterEntity(payload, principal);
+
+  if (entity.isActive) {
+    await clearActiveFlagFromOtherLitters(entity.rowKey);
+  }
+
   await client.createEntity(entity);
   return mapEntityToLitter(entity);
 }
@@ -246,6 +272,11 @@ async function updateLitter(payload, principal) {
   }
 
   const entity = buildLitterEntity(payload, principal, existingEntity);
+
+  if (entity.isActive) {
+    await clearActiveFlagFromOtherLitters(entity.rowKey);
+  }
+
   await client.updateEntity(entity, "Replace");
   return mapEntityToLitter(entity);
 }
