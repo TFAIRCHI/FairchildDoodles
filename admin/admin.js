@@ -204,7 +204,7 @@
         puppyForm.reset();
         document.getElementById("puppyId").value = "";
         document.getElementById("puppyAvailabilityStatus").value = "available";
-        document.getElementById("puppyIsActive").checked = false;
+        document.getElementById("puppyActiveStatus").value = "inactive";
         if (state.currentLitterFilter) {
             puppyLitterId.value = state.currentLitterFilter;
         }
@@ -239,7 +239,7 @@
         document.getElementById("puppyFeaturedImageId").value = puppy.featuredImageId || "";
         document.getElementById("puppyShortSummary").value = puppy.shortSummary || "";
         document.getElementById("puppyLongDescription").value = puppy.longDescription || "";
-        document.getElementById("puppyIsActive").checked = Boolean(puppy.isActive);
+        document.getElementById("puppyActiveStatus").value = puppy.isActive ? "active" : "inactive";
         setFeedback(puppyFeedback, "Editing puppy: " + puppy.displayName, false);
         puppyForm.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -308,7 +308,7 @@
             featuredImageId: document.getElementById("puppyFeaturedImageId").value,
             shortSummary: document.getElementById("puppyShortSummary").value,
             longDescription: document.getElementById("puppyLongDescription").value,
-            isActive: document.getElementById("puppyIsActive").checked
+            isActive: document.getElementById("puppyActiveStatus").value === "active"
         };
     }
 
